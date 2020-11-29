@@ -31,7 +31,7 @@ In Ratio you can resize count of cells in the table, it will resize your standar
                 }
             ],
             "Ratio":{
-                "Operator": "*"
+                "Operator": "*",
                 "Number": 123
             }
         }
