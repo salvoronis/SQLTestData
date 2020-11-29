@@ -1,0 +1,469 @@
+[
+	{
+		"Table_name": "Hidden_Village",
+		"Fields": [
+			{
+				"Field":"name",
+				"Type":"string"
+			}
+		]
+	},
+	{
+		"Table_name": "Clan",
+		"Fields": [
+			{
+				"Field":"name",
+				"Type":"string"
+			},
+			{
+				"Field":"village",
+				"Type":"int",
+				"Dependent":"Hidden_Village"
+			},
+			{
+				"Field":"prestige",
+				"Type":"int"
+			}
+		],
+		"Ratio": {
+			"Operator": "/",
+			"Number": 4
+		}
+	},
+	{
+		"Table_name": "Ninja",
+		"Fields": [
+			{
+				"Field":"name",
+				"Type":"string"
+			},
+			{
+				"Field":"age",
+				"Type":"int",
+				"Min":0,
+				"Max":100
+			},
+			{
+				"Field":"sex",
+				"Type":"string",
+				"Options": [
+					"F",
+					"M"
+				]
+			},
+			{
+				"Field":"village",
+				"Type":"int",
+				"Dependent":"Hidden_Village"
+			},
+			{
+				"Field":"clan",
+				"Type":"int",
+				"Dependent":"Clan"
+			},
+			{
+				"Field":"status",
+				"Type":"string",
+				"Options": [
+					"alive",
+					"dead"
+				]
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 20
+		}
+	},
+	{
+		"Table_name": "Clan_leader",
+		"Fields": [
+			{
+				"Field": "clan_ID",
+				"Type": "int",
+				"Dependent": "Clan"
+			},
+			{
+				"Field": "ninja_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			}
+		],
+		"Ratio": {
+			"Operator": "/",
+			"Number": 4
+		}
+	},
+	{
+		"Table_name": "Destroyed_village",
+		"Fields":[
+			{
+				"Field": "village_ID",
+				"Type": "int",
+				"Dependent": "Hidden_Village"
+			},
+			{
+				"Field": "destroyer",
+				"Type": "int",
+				"Dependent": "Ninja"
+			},
+			{
+				"Field": "quantity",
+				"Type": "int",
+				"Max": 100500
+			}
+		],
+		"Ratio": {
+			"Operator": "/",
+			"Number": 8
+		}
+	},
+	{
+		"Table_name": "Country_lord",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			},
+			{
+				"Field": "age",
+				"Type": "int",
+				"Max": 100,
+				"Min": 20
+			},
+			{
+				"Field": "sex",
+				"Type": "string",
+				"Options": [
+					"F",
+					"M"
+				]
+			},
+			{
+				"Field": "status",
+				"Type": "string",
+				"Options": [
+					"alive",
+					"dead"
+				]
+			}
+		],
+		"Ratio": {
+			"Operator": "/",
+			"Number": 2
+		}
+	},
+	{
+		"Table_name": "Country",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			},
+			{
+				"Field": "country_lord",
+				"Type": "int",
+				"Dependent": "Country_lord"
+			},
+			{
+				"Field": "hidden_village",
+				"Type": "int",
+				"Dependent": "Hidden_Village"
+			}
+		],
+		"Ratio": {
+			"Operator": "/",
+			"Number": 4
+		}
+	},
+	{
+		"Table_name": "Citizen",
+		"Fields": [
+			{
+				"Field": "village",
+				"Type": "int",
+				"Dependent": "Hidden_Village"
+			},
+			{
+				"Field": "name",
+				"Type": "string"
+			},
+			{
+				"Field": "age",
+				"Type": "int",
+				"Max": 100
+			},
+			{
+				"Field": "sex",
+				"Type": "string",
+				"Options": [
+					"F",
+					"M"
+				]
+			},
+			{
+				"Field": "status",
+				"Type": "string",
+				"Options": [
+					"alive",
+					"dead"
+				]
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 50
+		}
+	},
+	{
+		"Table_name": "Parents",
+		"Fields":[
+			{
+				"Field": "children_ID",
+				"Type": "int",
+				"Dependent": "Citizen"
+			},
+			{
+				"Field": "parent_Id",
+				"Type": "int",
+				"Dependent": "Citizen"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 20
+		}
+	},
+	{
+		"Table_name": "Ninja_parents",
+		"Fields":[
+			{
+				"Field": "children_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			},
+			{
+				"Field": "parent_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 2
+		}
+	},
+	{
+		"Table_name": "Biju",
+		"Fields":[
+			{
+				"Field":"name",
+				"Type":"string"
+			},
+			{
+				"Field":"count_of_tails",
+				"Type":"int",
+				"Max":9
+			}
+		]
+	},
+	{
+		"Table_name": "Jinchuriki",
+		"Fields":[
+			{
+				"Field": "ninja_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			},
+			{
+				"Field": "biju",
+				"Type": "int",
+				"Dependent": "Biju"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 2
+		}
+	},
+	{
+		"Table_name": "Ninjas_rank",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			},
+			{
+				"Field": "condition_of_receipt",
+				"Type": "string"
+			}
+		]
+	},
+	{
+		"Table_name": "Ranked_ninja",
+		"Fields": [
+			{
+				"Field": "rank_ID",
+				"Type": "int",
+				"Dependent": "Ninjas_rank"
+			},
+			{
+				"Field": "ninja_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 40
+		}
+	},
+	{
+		"Table_name": "Type",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 200
+		}
+	},
+	{
+		"Table_name": "Additional_type",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 50
+		}
+	},
+	{
+		"Table_name": "Technic_rank",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			}
+		]
+	},
+	{
+		"Table_name": "Technic",
+		"Fields": [
+			{
+				"Field": "type",
+				"Type": "int",
+				"Dependent": "Type"
+			},
+			{
+				"Field": "additional_type",
+				"Type": "int",
+				"Dependent": "Additional_type"
+			},
+			{
+				"Field": "blood_restriction",
+				"Type": "boolean"
+			},
+			{
+				"Field": "rank",
+				"Type": "int",
+				"Dependent": "Technic_rank"
+			},
+			{
+				"Field": "rune_seals",
+				"Type": "string"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 300
+		}
+	},
+	{
+		"Table_name": "Ninja_technic",
+		"Fields": [
+			{
+				"Field": "ninja_ID",
+				"Type": "int",
+				"Dependent": "Ninja"
+			},
+			{
+				"Field": "technic_ID",
+				"Type": "int",
+				"Dependent": "Technic"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 300
+		}
+	},
+	{
+		"Table_name": "War",
+		"Fields": [
+			{
+				"Field": "name",
+				"Type": "string"
+			},
+			{
+				"Field": "attacking_country",
+				"Type": "int",
+				"Dependent": "Country"
+			},
+			{
+				"Field": "defending_country",
+				"Type": "int",
+				"Dependent": "Country"
+			},
+			{
+				"Field": "loss_of_attackers",
+				"Type": "int",
+				"Max": 100500
+			},
+			{
+				"Field": "loss_of_defenders",
+				"Type": "int",
+				"Max": 100500
+			}
+		]
+	},
+	{
+		"Table_name": "Battle",
+		"Fields": [
+			{
+				"Field": "war",
+				"Type": "int",
+				"Dependent": "War"
+			},
+			{
+				"Field": "territory",
+				"Type": "int",
+				"Dependent": "Country"
+			},
+			{
+				"Field": "loss",
+				"Type": "int",
+				"Max": 100500
+			},
+			{
+				"Field": "duration",
+				"Type": "int",
+				"Max": 1000
+			},
+			{
+				"Field": "name",
+				"Type": "string"
+			}
+		],
+		"Ratio": {
+			"Operator": "*",
+			"Number": 3
+		}
+	}
+]
