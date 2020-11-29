@@ -1,5 +1,11 @@
+SRC = src/io.go src/types.go src/insert.go src/generators.go
+OUTPUT = sqlTester
+
 all:
-	go build -o sql_tester insert.go
+	go build -o $(OUTPUT) $(SRC)
 
 run:
-	go run insert.go 10
+	go run $(SRC) 10
+
+clean:
+	rm inserts.sql
