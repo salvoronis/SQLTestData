@@ -33,9 +33,9 @@ func main() {
 	rand.Seed(time.Now().UnixNano())
 
 	Parse_alphabet("./alphabet.json")
-	Parse_scheme("./table.json")
+	Parse_scheme("./test_table.json")
 
-	sql_script_file, err := os.Create("./inserts.sql")
+	sql_script_file, err := os.Create("./insertss.sql")
 	if err != nil {
 		logger.Println(err)
 	}

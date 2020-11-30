@@ -21,7 +21,7 @@ func Parse_alphabet(alphabet_path string){
 }
 
 func Parse_scheme(scheme_path string){
-	tables_file, err := os.Open("table.json")
+	tables_file, err := os.Open(scheme_path)
 	if err != nil {
 		logger.Println(err)
 	}

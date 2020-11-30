@@ -1,11 +1,12 @@
 package main
 
-import(
+import (
 	"math/rand"
+	"os"
 	"strconv"
 	"strings"
-	"os"
 	"text/template"
+	"time"
 )
 
 func Generate_table(request Request, file *os.File, tmp *template.Template){
@@ -63,8 +64,24 @@ func Gen_data(field Field_container) string{
 		return Itn_type(field)
 	case "boolean":
 		return Boolean_type(field)
+	case "date":
+		return Date_type(field)
 	}
 	return ""
+}
+
+func Date_type(field Field_container) string {
+	layoutISO := "2006-01-02"
+	min := 1000
+	max := 9999
+	if field.Max != 0 {
+		max = field.Max
+	}
+	if field.Min != 0 && field.Min >= 1000 {
+		min = field.Min
+	}
+	t := time.Date(min+rand.Intn(max-min), time.Month(1+rand.Intn(12)), 1+rand.Intn(28),0,0,0,0,time.UTC)
+	return "'" + t.Format(layoutISO) + "'"
 }
 
 func String_type(field Field_container) string{
