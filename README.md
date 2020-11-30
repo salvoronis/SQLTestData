@@ -49,11 +49,27 @@ In Ratio you can resize count of cells in the table, it will resize your standar
 
 ## Installation and running
 You can install it using `make all`
-The program at the moment doesn't support flags, so you can run it like `bin N`, where N is your standart count number
+After all this programm have standart flags, so it will work, even without any flags, just put your scheme into the `table.json` file and alphabet into the `alphabet.json` file
+The program supports flags, there they are:
+
+> -a string
+> JSON file containing alphabet (default "./alphabet.json")
+
+>-n int
+> A standart count of ceils (default 10)
+
+>-o string
+>Where to put result (default "./inserts.sql")
+
+>-t string
+>JSON file containing db scheme (default "./table.json")
+
+>-h
+>Help
 
 ## Why we don't use standart alphabet?
 
-  - Your can make your custom alphabet, which can sounds more naturalelly (see "japanese psewdo-words")
+  - Your can make your custom alphabet, which can sounds more naturalelly
   - We will, but later
 
 
