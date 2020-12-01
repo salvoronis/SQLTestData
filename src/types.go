@@ -19,4 +19,6 @@ type Field_container struct{
 	Dependent string;
 	Options []string;
 	Max, Min int;
+	Unique bool;
+	NotEqualID string;
 }

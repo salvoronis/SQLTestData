@@ -14,19 +14,51 @@ func Generate_table(request Request, file *os.File, tmp *template.Template){
 
 	dependencies[request.Table_name] = request.Count
 
+	table_uniques := make(map[string]int)
+
 	var b strings.Builder
 	for i := 0; i < request.Count; i++ {
 		b.WriteString("(")
 
+		var str string
+		notEquals := make(map[string]string)
+
 		for j := 0; j < len(request.Fields); j++ {
-			b.WriteString(Gen_data(request.Fields[j]))
+
+			data := Gen_data(request.Fields[j])
+
+			if request.Fields[j].NotEqualID != "" {
+				var fuse int = 0
+				for data == notEquals[request.Fields[j].NotEqualID] {
+					fuse++
+					if fuse > 100 {
+						logger.Fatalln("can not create not equal value")
+					}
+					data = Gen_data(request.Fields[j])
+				}
+				notEquals[request.Fields[j].NotEqualID] = data
+			}
+
+			if request.Fields[j].Unique {
+				var fuse int = 0
+				for table_uniques[request.Fields[j].Field+data] != 0 {
+					fuse++
+					data = Gen_data(request.Fields[j])
+					if fuse > 100 {
+						logger.Fatalln("can not create unique value")
+					}
+				}
+				table_uniques[request.Fields[j].Field+data] ++
+			}
+
+			str += data
 
 			if j != len(request.Fields)-1 {
-				b.WriteString(",")
+				str += ","
 			}
 
 		}
-		b.WriteString(")")
+		b.WriteString(str + ")")
 
 		if i != request.Count - 1{
 			b.WriteString(",\n\t")
@@ -59,7 +91,7 @@ func Count_comp(req Rati) int {
 func Gen_data(field Field_container) string{
 	switch field.Type {
 	case "string":
-		return String_type(field)
+		return "'" + String_type(field) + "'"
 	case "int":
 		return Itn_type(field)
 	case "boolean":
@@ -88,10 +120,7 @@ func String_type(field Field_container) string{
 	if len(field.Options) != 0{
 		return field.Options[rand.Intn(len(field.Options))]
 	}
-	var str string = "'"
-	str += Gen_rand_string(2+rand.Intn(4))
-	str += "'"
-	return str
+	return Gen_rand_string(2+rand.Intn(4))
 }
 
 func Itn_type(field Field_container) string {

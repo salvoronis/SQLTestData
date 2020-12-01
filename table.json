@@ -4,7 +4,8 @@
 		"Fields": [
 			{
 				"Field":"name",
-				"Type":"string"
+				"Type":"string",
+				"Unique": true
 			}
 		]
 	},
@@ -158,7 +159,8 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			},
 			{
 				"Field": "country_lord",
@@ -168,12 +170,13 @@
 			{
 				"Field": "hidden_village",
 				"Type": "int",
-				"Dependent": "Hidden_Village"
+				"Dependent": "Hidden_Village",
+				"Unique": true
 			}
 		],
 		"Ratio": {
 			"Operator": "/",
-			"Number": 4
+			"Number": 2
 		}
 	},
 	{
@@ -258,12 +261,14 @@
 		"Fields":[
 			{
 				"Field":"name",
-				"Type":"string"
+				"Type":"string",
+				"Unique": true
 			},
 			{
 				"Field":"count_of_tails",
 				"Type":"int",
-				"Max":9
+				"Max":10,
+				"Unique": true
 			}
 		]
 	},
@@ -291,7 +296,8 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			},
 			{
 				"Field": "condition_of_receipt",
@@ -323,7 +329,8 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			}
 		],
 		"Ratio": {
@@ -336,7 +343,8 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			}
 		],
 		"Ratio": {
@@ -349,7 +357,8 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			}
 		]
 	},
@@ -409,17 +418,20 @@
 		"Fields": [
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			},
 			{
 				"Field": "attacking_country",
 				"Type": "int",
-				"Dependent": "Country"
+				"Dependent": "Country",
+				"NotEqualID": "country"
 			},
 			{
 				"Field": "defending_country",
 				"Type": "int",
-				"Dependent": "Country"
+				"Dependent": "Country",
+				"NotEqualID": "country"
 			},
 			{
 				"Field": "loss_of_attackers",
@@ -458,7 +470,8 @@
 			},
 			{
 				"Field": "name",
-				"Type": "string"
+				"Type": "string",
+				"Unique": true
 			}
 		],
 		"Ratio": {
